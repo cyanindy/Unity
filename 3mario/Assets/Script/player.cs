@@ -3,23 +3,37 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class player : MonoBehaviour 
+public class player : MonoBehaviour
 {
     Rigidbody2D rigidbody2d;
     public float player_Speed = 60f;
     public int player_max_health=3;
     int player_current_health;
+
+    Animator animator;
+    Vector2 lookDirection = new Vector2(-1,0);
+
     void Start() {
         rigidbody2d = GetComponent<Rigidbody2D>();
-        player_current_health=player_max_health;
+        player_current_health = player_max_health;
+        animator = GetComponent<Animator>();
     }
 
     void Update() {
         float horizontal = Input.GetAxis("Horizontal");
+        Vector2 move = new Vector2(horizontal, 0);
+
+        if(!Mathf.Approximately(move.x,0)) {
+            lookDirection.Set(move.x, 0);
+            lookDirection.Normalize();
+        }
+
+        animator.SetFloat("move X", lookDirection.x);
+        animator.SetFloat("player_Speed", move.magnitude);
 
         Vector2 position = rigidbody2d.position;
 
-        position.x = position.x + player_Speed * horizontal * Time.deltaTime;
+        position = position + player_Speed * move * Time.deltaTime;
 
         rigidbody2d.MovePosition(position);
     }

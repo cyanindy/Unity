@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8898396262924850575}
   - component: {fileID: 3355098421242554828}
   - component: {fileID: 8767316779586848129}
+  - component: {fileID: 66557664444146219}
   m_Layer: 0
   m_Name: WALK_R_Clown_1 1
   m_TagString: Untagged
@@ -147,3 +148,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.91644764, y: 1.8463521}
   m_EdgeRadius: 0
+--- !u!95 &66557664444146219
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8898396262924850574}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d97aea0dc0234b143b85ea9c42b40f0c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
