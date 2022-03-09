@@ -9,10 +9,7 @@ public class player : MonoBehaviour
     public float player_Speed = 60f;
     public int player_max_health=3;
     int player_current_health;
-    public float radius = 1;
-
-    private float runningTime = 0;
-    private Vector2 newPos = new Vector2();
+    int q_timer;
 
     Animator animator;
 
@@ -26,6 +23,8 @@ public class player : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal");
         bool keydown_q = Input.GetKeyDown(KeyCode.Q);
         bool keydown_w = Input.GetKeyDown(KeyCode.W);
+        float Speed=player_Speed;
+
 
         if (horizontal==0) {
             animator.SetBool("isMoving", false);
@@ -45,26 +44,11 @@ public class player : MonoBehaviour
             animator.SetBool("attacking", false);
         }
 
-        
         Vector2 position = rigidbody2d.position;
-
-        if (keydown_w) {
-            Vector2 first_locate=rigidbody2d.position;
-
-            runningTime += Time.deltaTime * player_Speed;
-            float x = radius * Mathf.Sin(runningTime);
-            float y = radius * Mathf.Sin(runningTime);
-            newPos = new Vector2(x, y);
-            position = newPos;
-            keydown_w=true;
-            if (newPos.x == first_locate.x) {
-                keydown_w=false;
-            }
-        } else {
-            position.x = position.x + player_Speed * horizontal * Time.deltaTime;
-        }
+        position.x = position.x + (Speed * horizontal * Time.deltaTime);
 
         rigidbody2d.MovePosition(position);
+
     }
 
     public void ChangeHealth(int amount)
@@ -80,6 +64,14 @@ public class player : MonoBehaviour
 
     public void attack() {
         animator.SetBool("attacking",true);
+    }
+
+    public void q_start() {
+        player_Speed=0;
+    }
+
+    public void q_end() {
+        player_Speed=60f;
     }
 
 }//class end
