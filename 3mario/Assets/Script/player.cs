@@ -9,9 +9,12 @@ public class player : MonoBehaviour
     public float player_Speed = 60f;
     public int player_max_health=3;
     int player_current_health;
+    public float radius = 1;
+
+    private float runningTime = 0;
+    private Vector2 newPos = new Vector2();
 
     Animator animator;
-    Vector2 lookDirection = new Vector2(-1,0);
 
     void Start() {
         rigidbody2d = GetComponent<Rigidbody2D>();
@@ -21,19 +24,45 @@ public class player : MonoBehaviour
 
     void Update() {
         float horizontal = Input.GetAxis("Horizontal");
-        Vector2 move = new Vector2(horizontal, 0);
+        bool keydown_q = Input.GetKeyDown(KeyCode.Q);
+        bool keydown_w = Input.GetKeyDown(KeyCode.W);
 
-        if(!Mathf.Approximately(move.x,0)) {
-            lookDirection.Set(move.x, 0);
-            lookDirection.Normalize();
+        if (horizontal==0) {
+            animator.SetBool("isMoving", false);
+        }
+        else if(horizontal < 0) {
+            animator.SetInteger ("direction", -1);
+            animator.SetBool("isMoving", true);
+        }
+        else if (horizontal > 0 ) {
+            animator.SetInteger ("direction", 1);
+            animator.SetBool("isMoving", true);
         }
 
-        animator.SetFloat("move X", lookDirection.x);
-        animator.SetFloat("player_Speed", move.magnitude);
+        if (keydown_q) {
+            attack();
+        } else {
+            animator.SetBool("attacking", false);
+        }
 
+        
         Vector2 position = rigidbody2d.position;
 
-        position = position + player_Speed * move * Time.deltaTime;
+        if (keydown_w) {
+            Vector2 first_locate=rigidbody2d.position;
+
+            runningTime += Time.deltaTime * player_Speed;
+            float x = radius * Mathf.Sin(runningTime);
+            float y = radius * Mathf.Sin(runningTime);
+            newPos = new Vector2(x, y);
+            position = newPos;
+            keydown_w=true;
+            if (newPos.x == first_locate.x) {
+                keydown_w=false;
+            }
+        } else {
+            position.x = position.x + player_Speed * horizontal * Time.deltaTime;
+        }
 
         rigidbody2d.MovePosition(position);
     }
@@ -47,6 +76,10 @@ public class player : MonoBehaviour
     public void falling() {
         player_current_health=0;
         Debug.Log(player_current_health + "/" + player_max_health);
+    }
+
+    public void attack() {
+        animator.SetBool("attacking",true);
     }
 
 }//class end
