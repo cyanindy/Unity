@@ -10,6 +10,7 @@ public class player : MonoBehaviour
     public int player_max_health=3;
     int player_current_health;
     int q_timer;
+    bool isAttacking;
 
     Animator animator;
 
@@ -44,10 +45,13 @@ public class player : MonoBehaviour
             animator.SetBool("attacking", false);
         }
 
-        Vector2 position = rigidbody2d.position;
-        position.x = position.x + (Speed * horizontal * Time.deltaTime);
-
-        rigidbody2d.MovePosition(position);
+        Vector2 position = rigidbody2d.position; //현재위치 백터
+        if(!isAttacking) {
+            position.x = position.x + (Speed * horizontal * Time.deltaTime);
+            rigidbody2d.MovePosition(position);
+        } else {
+            rigidbody2d.MovePosition(position);
+        }
 
     }
 
@@ -66,12 +70,15 @@ public class player : MonoBehaviour
         animator.SetBool("attacking",true);
     }
 
-    public void q_start() {
-        player_Speed=0;
+    private void atk_start() {
+        //player_Speed=0;
+        isAttacking=true;
+        Debug.Log("atk_start()");
     }
 
-    public void q_end() {
-        player_Speed=60f;
+    private void atk_end() {
+        isAttacking=false;
+        Debug.Log("atk_end()");
     }
 
 }//class end
