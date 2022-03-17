@@ -345,9 +345,11 @@
 "Assets/2D Destructible Objects/Assets/C#Scripts/Piece.cs"
 "Assets/2D Destructible Objects/Assets/C#Scripts/Shatterable.cs"
 "Assets/2D Destructible Objects/Assets/C#Scripts/Spawner.cs"
+"Assets/Script/balls.cs"
 "Assets/Script/bounceball.cs"
 "Assets/Script/invisible_floor.cs"
 "Assets/Script/player.cs"
+"Assets/Script/PointandPotal.cs"
 -langversion:8.0
 
 /deterministic

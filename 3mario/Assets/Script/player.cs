@@ -9,8 +9,10 @@ public class player : MonoBehaviour
     public float player_Speed = 60f;
     public int player_max_health=3;
     int player_current_health;
-    int q_timer;
-    bool isAttacking;
+    int curse_count=3;
+    bool isAttacking=false;
+    Vector3 player_first_position = new Vector3(-11,-1,0);
+    Vector2 lookDirection = new Vector2(1,0);
 
     Animator animator;
 
@@ -18,13 +20,23 @@ public class player : MonoBehaviour
         rigidbody2d = GetComponent<Rigidbody2D>();
         player_current_health = player_max_health;
         animator = GetComponent<Animator>();
+
+        rigidbody2d.MovePosition(player_first_position);
     }
 
     void Update() {
         float horizontal = Input.GetAxis("Horizontal");
-        bool keydown_q = Input.GetKeyDown(KeyCode.Q);
+        float vertical = Input.GetAxis("Vertical");
         bool keydown_w = Input.GetKeyDown(KeyCode.W);
         float Speed=player_Speed;
+        Vector3 potal_coordinate;
+
+        Vector2 move = new Vector2(horizontal, vertical);
+        if(!Mathf.Approximately(move.x, 0.0f) || !Mathf.Approximately(move.y, 0.0f))
+        {
+            lookDirection.Set(move.x, move.y);
+            lookDirection.Normalize();
+        }//lookDirection 을 위한 vector 랑 normalize
 
 
         if (horizontal==0) {
@@ -39,19 +51,50 @@ public class player : MonoBehaviour
             animator.SetBool("isMoving", true);
         }
 
-        if (keydown_q) {
+        if (Input.GetKeyDown(KeyCode.Q)) { //q키 상호작용
             attack();
+            RaycastHit2D ball_hit = Physics2D.Raycast(rigidbody2d.position + Vector2.up * 0.2f, lookDirection, 2.0f, LayerMask.GetMask("balls"));
+            string ballN=ball_hit.collider.gameObject.name;
+            if (ball_hit.collider != null) {
+                Debug.Log("keydown Q : " + ball_hit.collider.gameObject);
+                balls character = ball_hit.collider.GetComponent<balls>();
+                if (character != null)
+                {
+                    curse_count = curse_count - character.hit(ballN);
+                    Debug.Log("left curse_count : " + curse_count);
+                }
+            }
+
         } else {
             animator.SetBool("attacking", false);
         }
 
+
         Vector2 position = rigidbody2d.position; //현재위치 백터
-        if(!isAttacking) {
-            position.x = position.x + (Speed * horizontal * Time.deltaTime);
-            rigidbody2d.MovePosition(position);
+
+        if (Input.GetKeyDown(KeyCode.G)) //g키 상호작용
+        {
+            RaycastHit2D potal_hit = Physics2D.Raycast(rigidbody2d.position + Vector2.up * 0.2f, lookDirection, 1.0f, LayerMask.GetMask("potal"));
+            string pointN= potal_hit.collider.gameObject.name;
+            if (potal_hit.collider != null)
+            {
+                Debug.Log("keydown G : " + potal_hit.collider.gameObject);
+                PointandPotal character = potal_hit.collider.GetComponent<PointandPotal>();
+                if (character != null)
+                {
+                    potal_coordinate=character.updown(pointN);
+                    rigidbody2d.MovePosition(potal_coordinate);
+                }
+            }
         } else {
-            rigidbody2d.MovePosition(position);
+            if(!isAttacking) { //이동이 이루어지는 곳
+                position.x = position.x + (Speed * horizontal * Time.deltaTime);
+                rigidbody2d.MovePosition(position);
+            } else {
+                rigidbody2d.MovePosition(position);
+            }
         }
+
 
     }
 
