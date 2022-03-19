@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2378986759160370763}
   - component: {fileID: 2734502040256521612}
   - component: {fileID: 5423067755752516941}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: point_up_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,10 +115,10 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.251338}
+  m_Offset: {x: 0.08018017, y: -0.251338}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -129,7 +129,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.7374382, y: 1.7831373}
+  m_Size: {x: 3.0737667, y: 1.7831373}
   m_EdgeRadius: 0
 --- !u!114 &5423067755752516941
 MonoBehaviour:
@@ -143,3 +143,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a545bd36be3ba64ea9f9fbc37ac4b33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  departure_obj: {fileID: 0}
+  arrival_obj: {fileID: 0}

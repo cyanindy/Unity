@@ -10,9 +10,16 @@ public class player : MonoBehaviour
     public int player_max_health=3;
     int player_current_health;
     int curse_count=3;
-    bool isAttacking=false;
+    bool q_sw=false; public bool g_sw=false; bool w_sw=false;
     Vector3 player_first_position = new Vector3(-11,-1,0);
     Vector2 lookDirection = new Vector2(1,0);
+    int int_look_Direction=1;
+    Vector2 w_first_position; //w키 입력 당시의 좌표
+    Vector2 w_middle_position; //꼭지점
+    Vector2 w_last_position; //w키 입력 이후 이동될 목표지점 좌표
+    int w_para=0;
+    float jump_height=2.0f; //
+    float jump_weith=4.5f; //반지름
 
     Animator animator;
 
@@ -27,9 +34,8 @@ public class player : MonoBehaviour
     void Update() {
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
-        bool keydown_w = Input.GetKeyDown(KeyCode.W);
+        Vector2 position = rigidbody2d.position; //현재위치 백터
         float Speed=player_Speed;
-        Vector3 potal_coordinate;
 
         Vector2 move = new Vector2(horizontal, vertical);
         if(!Mathf.Approximately(move.x, 0.0f) || !Mathf.Approximately(move.y, 0.0f))
@@ -38,21 +44,22 @@ public class player : MonoBehaviour
             lookDirection.Normalize();
         }//lookDirection 을 위한 vector 랑 normalize
 
-
         if (horizontal==0) {
             animator.SetBool("isMoving", false);
         }
         else if(horizontal < 0) {
             animator.SetInteger ("direction", -1);
             animator.SetBool("isMoving", true);
+            int_look_Direction=-1;
         }
         else if (horizontal > 0 ) {
             animator.SetInteger ("direction", 1);
             animator.SetBool("isMoving", true);
+            int_look_Direction=1;
         }
 
         if (Input.GetKeyDown(KeyCode.Q)) { //q키 상호작용
-            attack();
+            animator.SetBool("attacking",true);
             RaycastHit2D ball_hit = Physics2D.Raycast(rigidbody2d.position + Vector2.up * 0.2f, lookDirection, 2.0f, LayerMask.GetMask("balls"));
             string ballN=ball_hit.collider.gameObject.name;
             if (ball_hit.collider != null) {
@@ -69,34 +76,27 @@ public class player : MonoBehaviour
             animator.SetBool("attacking", false);
         }
 
-
-        Vector2 position = rigidbody2d.position; //현재위치 백터
-
-        if (Input.GetKeyDown(KeyCode.G)) //g키 상호작용
-        {
-            RaycastHit2D potal_hit = Physics2D.Raycast(rigidbody2d.position + Vector2.up * 0.2f, lookDirection, 1.0f, LayerMask.GetMask("potal"));
-            string pointN= potal_hit.collider.gameObject.name;
-            if (potal_hit.collider != null)
-            {
-                Debug.Log("keydown G : " + potal_hit.collider.gameObject);
-                PointandPotal character = potal_hit.collider.GetComponent<PointandPotal>();
-                if (character != null)
-                {
-                    potal_coordinate=character.updown(pointN);
-                    rigidbody2d.MovePosition(potal_coordinate);
-                }
-            }
-        } else {
-            if(!isAttacking) { //이동이 이루어지는 곳
-                position.x = position.x + (Speed * horizontal * Time.deltaTime);
-                rigidbody2d.MovePosition(position);
-            } else {
-                rigidbody2d.MovePosition(position);
-            }
+        if (Input.GetKeyDown(KeyCode.W)) {
+            w_last_position.x=position.x+jump_weith; w_last_position.y=position.y;
+            w_middle_position.x=position.x+(jump_weith/2); w_middle_position.y=position.y+jump_height;
+            w_sw=true;
+            w_para=1;
         }
 
-
-    }
+        if(w_para==1) {
+            transform.position=Vector2.MoveTowards(position,w_middle_position,Speed*Time.deltaTime);
+            if (position.y==w_middle_position.y) {w_para=-1;}
+        } else if (w_para==-1) {
+            transform.position=Vector2.MoveTowards(position,w_last_position,Speed*Time.deltaTime);
+            if (position==w_last_position) {w_para=0; w_sw=false;}
+        }
+            
+        if(!q_sw && !w_sw && !g_sw) { //이동이 이루어지는 곳
+            position.x = position.x + (Speed * horizontal * Time.deltaTime);
+        }
+    
+        if(w_para==0) {rigidbody2d.MovePosition(position);}
+    }//update end
 
     public void ChangeHealth(int amount)
     {
@@ -109,113 +109,15 @@ public class player : MonoBehaviour
         Debug.Log(player_current_health + "/" + player_max_health);
     }
 
-    public void attack() {
-        animator.SetBool("attacking",true);
-    }
-
     private void atk_start() {
         //player_Speed=0;
-        isAttacking=true;
+        q_sw=true;
         Debug.Log("atk_start()");
     }
 
     private void atk_end() {
-        isAttacking=false;
+        q_sw=false;
         Debug.Log("atk_end()");
     }
 
 }//class end
-
-
-
-
-/*
-public class player : MonoBehaviour
-{
-
-    public float maxSpeed = 100f;
-    public float Speed = 50f;
-    private Rigidbody2D rigidBody;
-    private Animator animator;
-
-    private bool moveLeft = false;
-    private bool moveRight = false;
-    private bool isMoving = false;
-
-    // Use this for initialization
-    void Start ()
-    {
-        rigidBody = GetComponent<Rigidbody2D>();
-        animator = GetComponentInChildren<Animator>();
-    }
-	
-	// Update is called once per frame
-	void Update ()
-    {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            moveRight = false;
-            moveLeft = false;
-            isMoving = false;
-            animator.SetTrigger("Attack");
-        }
-        else if (Input.GetKey(KeyCode.A))
-        {
-            moveLeft = true;
-            moveRight = false;
-
-            if (!isMoving)
-            {
-                isMoving = true;
-                animator.SetFloat("Direction", -1);
-                animator.SetTrigger("Move");
-            }
-        }
-        else if (Input.GetKey(KeyCode.D))
-        {
-            moveRight = true;
-            moveLeft = false;
-
-            if (!isMoving)
-            {
-                isMoving = true;
-                animator.SetFloat("Direction", 1);
-                animator.SetTrigger("Move");
-            }
-        }
-
-        if(Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.A))
-        {
-            isMoving = false;
-            moveRight = false;
-            moveLeft = false;
-            animator.SetTrigger("Stand");
-        }
-    }
-
-    void FixedUpdate()
-    {
-        float move = 0;
-
-        if (moveLeft)
-            move = -1;
-        else if (moveRight)
-            move = 1;
-        
-
-        if (move != 0)
-        {
-            if (Mathf.Abs(rigidBody.velocity.x) < maxSpeed)
-            {
-                Vector2 toMove = new Vector2(move * Speed, rigidBody.velocity.y);
-                rigidBody.AddForce(toMove);
-            }
-            
-        }
-        else if(move == 0)
-        {
-            rigidBody.velocity = new Vector2(0, 0);
-        }
-    }
-}
-*/

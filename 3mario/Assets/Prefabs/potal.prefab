@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1069477808221678102}
   - component: {fileID: 3162470252086279514}
   - component: {fileID: 4481671143942244818}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: potal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.10690594, y: -0.057907104}
@@ -123,3 +123,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a545bd36be3ba64ea9f9fbc37ac4b33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  departure_obj: {fileID: 0}
+  arrival_obj: {fileID: 0}
