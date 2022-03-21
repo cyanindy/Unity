@@ -14,12 +14,11 @@ public class player : MonoBehaviour
     Vector3 player_first_position = new Vector3(-11,-1,0);
     Vector2 lookDirection = new Vector2(1,0);
     int int_look_Direction=1;
-    Vector2 w_first_position; //w키 입력 당시의 좌표
     Vector2 w_middle_position; //꼭지점
     Vector2 w_last_position; //w키 입력 이후 이동될 목표지점 좌표
     int w_para=0;
-    float jump_height=2.0f; //
-    float jump_weith=4.5f; //반지름
+    float jump_height=2.0f; //점프 높이
+    float jump_weith=5.0f; //점프거리
 
     Animator animator;
 
@@ -64,14 +63,17 @@ public class player : MonoBehaviour
             string ballN=ball_hit.collider.gameObject.name;
             if (ball_hit.collider != null) {
                 Debug.Log("keydown Q : " + ball_hit.collider.gameObject);
-                balls character = ball_hit.collider.GetComponent<balls>();
-                if (character != null)
+                balls judge_ball = ball_hit.collider.GetComponent<balls>();
+                if (judge_ball != null)
                 {
-                    curse_count = curse_count - character.hit(ballN);
-                    Debug.Log("left curse_count : " + curse_count);
-                }
+                    if (judge_ball.hit(ballN)) {
+                        curse_count = curse_count - 1;
+                        Debug.Log("left curse_count : " + curse_count);
+                    } else {
+                        ChangeHealth(-1);
+                    }
+                } else { ;}
             }
-
         } else {
             animator.SetBool("attacking", false);
         }

@@ -17,14 +17,14 @@ public class balls : MonoBehaviour
         
     }
 
-    public int hit(string ballname) {
+    public bool hit(string ballname) {
         ball=GameObject.Find(ballname);
         Destroy(ball);
         if (ballname=="ball_blue_1" || ballname=="ball_blue_2" || ballname=="ball_blue_3") {
-            return 1;
+            return true;
         }
         else {
-            return 0;
+            return false;
         }
     }
 }

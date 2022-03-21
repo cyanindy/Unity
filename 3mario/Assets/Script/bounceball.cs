@@ -5,7 +5,7 @@ using UnityEngine;
 public class bounceball : MonoBehaviour
 {
     
-    public float bounceball_speed=2f; // 이동속도
+    public float bounceball_speed=2.5f; // 이동속도
     Vector3 pos; //현재위치
     float delta = 5.0f; // 좌(우)로 이동가능한 (x)최대값
 

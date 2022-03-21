@@ -348,8 +348,10 @@
 "Assets/Script/balls.cs"
 "Assets/Script/bounceball.cs"
 "Assets/Script/invisible_floor.cs"
+"Assets/Script/McD.cs"
 "Assets/Script/player.cs"
 "Assets/Script/PointandPotal.cs"
+"Assets/Script/rangeBox.cs"
 -langversion:8.0
 
 /deterministic
