@@ -77,17 +77,17 @@ public class player : MonoBehaviour
         }
 
         if (Input.GetKeyDown(KeyCode.W)) {
-            w_last_position.x=position.x+jump_weith; w_last_position.y=position.y;
-            w_middle_position.x=position.x+(jump_weith/2); w_middle_position.y=position.y+jump_height;
+            w_last_position.x=position.x+(jump_weith*int_look_Direction); w_last_position.y=position.y;
+            w_middle_position.x=position.x+((jump_weith*int_look_Direction)/2); w_middle_position.y=position.y+jump_height;
             w_sw=true;
             w_para=1;
         }
 
         if(w_para==1) {
-            transform.position=Vector2.MoveTowards(position,w_middle_position,Speed*Time.deltaTime);
+            transform.position=Vector2.MoveTowards(position,w_middle_position,Speed*0.25f*Time.deltaTime);
             if (position.y==w_middle_position.y) {w_para=-1;}
         } else if (w_para==-1) {
-            transform.position=Vector2.MoveTowards(position,w_last_position,Speed*Time.deltaTime);
+            transform.position=Vector2.MoveTowards(position,w_last_position,Speed*0.25f*Time.deltaTime);
             if (position==w_last_position) {w_para=0; w_sw=false;}
         }
             
