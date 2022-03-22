@@ -21,7 +21,6 @@ public class rangeBox : MonoBehaviour
     {
         player controller = other.GetComponent<player>();
         
-
         if (controller != null)
         {
             McD.GetComponent<McD>().onRange();

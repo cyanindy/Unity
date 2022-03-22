@@ -6,6 +6,10 @@ public class McD : MonoBehaviour
 {
     Animator animator;
     bool onrange=false;
+    public float coolTime=3.0f;
+    private float curTime;
+    public Transform pos;
+    public Vector2 boxSize;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,13 +19,31 @@ public class McD : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(onrange) { //사거리 오브젝트를 플레이어가 밟았다?
-            animator.SetBool("onrange",true);
+        if(curTime <= 0) {
+            if(onrange) { //사거리 오브젝트를 플레이어가 밟았다?
+                Collider2D[] collider2Ds = Physics2D.OverlapBoxAll(pos.position, boxSize, 0);
+                foreach (Collider2D collider in collider2Ds) {
+                    if (collider.tag == "Player") {
+                        collider.GetComponent<player>().ChangeHealth(-1);
+                    }
+                }
+                animator.SetTrigger("atk");
+                curTime=coolTime;
+            }
         }
+        else {
+            curTime -= Time.deltaTime;
+        }
+
     }
 
     public void onRange() {
         onrange=true;
         Debug.Log("Player is within range");
+    }
+
+    private void OnDrawGizmos() {
+        Gizmos.color=Color.blue;
+        Gizmos.DrawWireCube(pos.position, boxSize);
     }
 }

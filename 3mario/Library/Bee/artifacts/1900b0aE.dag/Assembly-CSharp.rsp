@@ -346,6 +346,8 @@
 "Assets/2D Destructible Objects/Assets/C#Scripts/Shatterable.cs"
 "Assets/2D Destructible Objects/Assets/C#Scripts/Spawner.cs"
 "Assets/Script/balls.cs"
+"Assets/Script/bomb.cs"
+"Assets/Script/bomb_range.cs"
 "Assets/Script/bounceball.cs"
 "Assets/Script/invisible_floor.cs"
 "Assets/Script/McD.cs"
