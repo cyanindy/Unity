@@ -349,6 +349,7 @@
 "Assets/Script/bomb.cs"
 "Assets/Script/bomb_range.cs"
 "Assets/Script/bounceball.cs"
+"Assets/Script/greeny.cs"
 "Assets/Script/invisible_floor.cs"
 "Assets/Script/McD.cs"
 "Assets/Script/player.cs"

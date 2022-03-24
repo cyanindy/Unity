@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 3420389117672303871}
   - component: {fileID: 6246257255065017055}
   - component: {fileID: 8956624647638635523}
-  m_Layer: 12
+  m_Layer: 11
   m_Name: "\uB3C4\uC6B0\uB108_0000s_0012_\uADF8\uB8F9-001"
-  m_TagString: Untagged
+  m_TagString: McD
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -123,3 +123,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf08b57e71b38b64fb3519ed358f565a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coolTime: 3
+  pos: {fileID: 0}
+  boxSize: {x: 0, y: 0}

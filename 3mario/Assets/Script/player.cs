@@ -19,6 +19,7 @@ public class player : MonoBehaviour
     int w_para=0;
     float jump_height=2.0f; //점프 높이
     float jump_weith=5.0f; //점프거리
+    public Vector2 player_pos;
 
     Animator animator;
 
@@ -34,6 +35,7 @@ public class player : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
         Vector2 position = rigidbody2d.position; //현재위치 백터
+        player_pos=position;
         float Speed=player_Speed;
 
         Vector2 move = new Vector2(horizontal, vertical);
@@ -59,21 +61,40 @@ public class player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Q)) { //q키 상호작용
             animator.SetBool("attacking",true);
-            RaycastHit2D ball_hit = Physics2D.Raycast(rigidbody2d.position + Vector2.up * 0.2f, lookDirection, 2.0f, LayerMask.GetMask("balls"));
-            string ballN=ball_hit.collider.gameObject.name;
-            if (ball_hit.collider != null) {
-                Debug.Log("keydown Q : " + ball_hit.collider.gameObject);
-                balls judge_ball = ball_hit.collider.GetComponent<balls>();
-                if (judge_ball != null)
-                {
-                    if (judge_ball.hit(ballN)) {
-                        curse_count = curse_count - 1;
-                        Debug.Log("left curse_count : " + curse_count);
-                    } else {
-                        ChangeHealth(-1);
-                    }
-                } else { ;}
+            RaycastHit2D obj_hit = Physics2D.Raycast(rigidbody2d.position + Vector2.up * 0.2f, lookDirection, 2.0f, LayerMask.GetMask("react_q_obj"));
+            string obj_N=obj_hit.collider.gameObject.name;
+
+            string obj_tag = obj_hit.collider.tag;
+            if (obj_tag == "balls" ) {
+                if (obj_hit.collider != null) {
+                    Debug.Log("keydown Q : " + obj_hit.collider.gameObject);
+                    balls judge_ball = obj_hit.collider.GetComponent<balls>();
+                    if (judge_ball != null)
+                    {
+                        if (judge_ball.hit(obj_N)) {
+                            curse_count = curse_count - 1;
+                            Debug.Log("left curse_count : " + curse_count);
+                        } else {
+                            ChangeHealth(-1);
+                        }
+                    } else { ;}
+                }
             }
+            else if (obj_tag == "greeny") {
+                if (obj_hit.collider != null) {
+                    Debug.Log("keydown Q : " + obj_hit.collider.gameObject);
+                    greeny judge_greeny = obj_hit.collider.GetComponent<greeny>();
+                    judge_greeny.hit(obj_N);
+                }
+            }
+            else if (obj_tag == "McD") {
+                if (obj_hit.collider != null) {
+                    Debug.Log("keydown Q : " + obj_hit.collider.gameObject);
+                    McD judge_mcd = obj_hit.collider.GetComponent<McD>();
+                    judge_mcd.hit(1);
+                }
+            }
+            else {;}
         } else {
             animator.SetBool("attacking", false);
         }

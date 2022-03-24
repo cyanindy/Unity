@@ -26,10 +26,9 @@ public class bomb : MonoBehaviour
                 foreach (Collider2D collider in collider2Ds) {
                     if (collider.tag == "Player") {
                         collider.GetComponent<player>().ChangeHealth(-1);
-                        explode(bomb_name);
                     }
                 }
-
+                explode(bomb_name);
             } else {
                 limTime-=Time.deltaTime;
             }

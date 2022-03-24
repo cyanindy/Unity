@@ -30,7 +30,7 @@ public class PointandPotal : MonoBehaviour
     private void OnTriggerStay2D(Collider2D collision) {
         if(collision.CompareTag("Player") && Input.GetKey(KeyCode.G)) {
             StartCoroutine( TeleportRoutine() );
-            Debug.Log("keydown");
+            //Debug.Log("keydown");
         }
     }
 

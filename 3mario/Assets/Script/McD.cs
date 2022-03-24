@@ -10,6 +10,7 @@ public class McD : MonoBehaviour
     private float curTime;
     public Transform pos;
     public Vector2 boxSize;
+    int mcd_health=2;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +36,10 @@ public class McD : MonoBehaviour
             curTime -= Time.deltaTime;
         }
 
+        if (mcd_health<=0) {
+            Destroy(gameObject);
+        }
+
     }
 
     public void onRange() {
@@ -45,5 +50,10 @@ public class McD : MonoBehaviour
     private void OnDrawGizmos() {
         Gizmos.color=Color.blue;
         Gizmos.DrawWireCube(pos.position, boxSize);
+    }
+
+    public void hit(int damege) {
+        mcd_health=mcd_health-damege;
+        Debug.Log("McD health :"+mcd_health+"/ 2");
     }
 }
