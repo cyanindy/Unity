@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 4048698213446586419}
   - component: {fileID: 569161705855145023}
   - component: {fileID: 1745724378170914848}
+  - component: {fileID: 2429248237349911954}
   m_Layer: 11
   m_Name: greeny
   m_TagString: greeny
@@ -159,7 +160,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   horizontal: 1
-  changeTime: 5
+  changeTime: 7
   sight_pos: {fileID: 8413551874746639374}
   sight_boxSize: {x: 6, y: 3}
   right_hit_pos: {fileID: 9199506458354034077}
@@ -187,6 +188,25 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!95 &2429248237349911954
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3033236035356760263}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c7706794a4dbd1d498f859f6f8cce363, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &8475599079601623865
 GameObject:
   m_ObjectHideFlags: 0

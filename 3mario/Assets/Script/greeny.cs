@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class greeny : MonoBehaviour
 {
-    public float speed=10.0f;
+    float speed=7.0f;
     public bool horizontal=true;
     public float changeTime = 5.0f;
     Rigidbody2D rigidbody2D;
@@ -26,6 +26,9 @@ public class greeny : MonoBehaviour
     public Vector2 right_hit_boxSize;
     public Transform left_hit_pos;
     public Vector2 left_hit_boxSize;
+    float stop_timer=4.0f;
+
+    public Vector2 greeny_first_pos;
 
     GameObject greeny_obj;
     
@@ -34,6 +37,8 @@ public class greeny : MonoBehaviour
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+
+        rigidbody2D.MovePosition(greeny_first_pos);
     }
 
     // Update is called once per frame
@@ -43,34 +48,39 @@ public class greeny : MonoBehaviour
         player call = GameObject.Find("WALK_R_Clown_1").GetComponent<player>();
         Vector2 player_pos = call.player_pos;
 
-        timer -= Time.deltaTime;
-        if (dir_for_player) {
-            if (player_pos.x - position.x <=0) {
-                direction = -1;
-                animator.SetBool("isLeft", true);
-                time_keepdir-=Time.deltaTime;
-                if (time_keepdir<=0) {
-                    dir_for_player=false;
+        if(stop_timer<=0) {
+            timer -= Time.deltaTime;
+            if (dir_for_player) {
+                if (player_pos.x - position.x <=0) {
+                    direction = -1;
+                    animator.SetBool("isLeft", true);
+                    time_keepdir-=Time.deltaTime;
+                    if (time_keepdir<=0) {
+                        dir_for_player=false;
+                    }
+                } else {
+                    direction = 1;
+                    animator.SetBool("isLeft", false);
+                    time_keepdir-=Time.deltaTime;
+                    if (time_keepdir<=0) {
+                        dir_for_player=false;
+                    }
                 }
             } else {
-                direction = 1;
-                animator.SetBool("isLeft", false);
-                time_keepdir-=Time.deltaTime;
-                if (time_keepdir<=0) {
-                    dir_for_player=false;
+                if (timer < 0)
+                {
+                    direction = -direction;
+                    timer = changeTime;
+                    if (direction>0) {
+                        animator.SetBool("isLeft", false);
+                    } else {
+                        animator.SetBool("isLeft", true);
+                    }
                 }
             }
-        } else {
-            if (timer < 0)
-            {
-                direction = -direction;
-                timer = changeTime;
-                if (direction>0) {
-                    animator.SetBool("isLeft", false);
-                } else {
-                    animator.SetBool("isLeft", true);
-                }
-            }
+        } else { 
+            position = greeny_first_pos;
+            stop_timer-=Time.deltaTime;
         }
 
         if (!isAttacking)
