@@ -7,7 +7,7 @@ public class player : MonoBehaviour
 {
     Rigidbody2D rigidbody2d;
     public float player_Speed = 60f;
-    public int player_max_health=3;
+    int player_max_health=5;
     int player_current_health;
     int curse_count=3;
     bool q_sw=false; public bool g_sw=false; bool w_sw=false;
@@ -21,12 +21,20 @@ public class player : MonoBehaviour
     float jump_weith=5.0f; //점프거리
     public Vector2 player_pos;
 
+    //저주해제
+    public float displayTime = 2.0f;
+    public GameObject dialogBox;
+    float timerDisplay;
+
     Animator animator;
 
     void Start() {
         rigidbody2d = GetComponent<Rigidbody2D>();
         player_current_health = player_max_health;
         animator = GetComponent<Animator>();
+
+        dialogBox.SetActive(false);
+        timerDisplay = -1.0f;
 
         rigidbody2d.MovePosition(player_first_position);
     }
@@ -59,7 +67,8 @@ public class player : MonoBehaviour
             int_look_Direction=1;
         }
 
-        if (Input.GetKeyDown(KeyCode.Q)) { //q키 상호작용
+        //q키 상호작용
+        if (Input.GetKeyDown(KeyCode.Q)) { 
             animator.SetBool("attacking",true);
             RaycastHit2D obj_hit = Physics2D.Raycast(rigidbody2d.position + Vector2.up * 0.2f, lookDirection, 2.0f, LayerMask.GetMask("react_q_obj"));
             string obj_N=obj_hit.collider.gameObject.name;
@@ -73,7 +82,9 @@ public class player : MonoBehaviour
                     {
                         if (judge_ball.hit(obj_N)) {
                             curse_count = curse_count - 1;
-                            Debug.Log("left curse_count : " + curse_count);
+                            if (curse_count==0) {
+                                DisplayDialog();
+                            }
                         } else {
                             ChangeHealth(-1);
                         }
@@ -99,6 +110,7 @@ public class player : MonoBehaviour
             animator.SetBool("attacking", false);
         }
 
+        //w key down
         if (Input.GetKeyDown(KeyCode.W)) {
             w_last_position.x=position.x+(jump_weith*int_look_Direction); w_last_position.y=position.y;
             w_middle_position.x=position.x+((jump_weith*int_look_Direction)/2); w_middle_position.y=position.y+jump_height;
@@ -116,6 +128,16 @@ public class player : MonoBehaviour
             
         if(!q_sw && !w_sw && !g_sw) { //이동이 이루어지는 곳
             position.x = position.x + (Speed * horizontal * Time.deltaTime);
+        }
+
+        //저주해제 띄우기
+        if (timerDisplay >= 0)
+        {
+            timerDisplay -= Time.deltaTime;
+            if (timerDisplay < 0)
+            {
+                dialogBox.SetActive(false);
+            }
         }
     
         if(w_para==0) {rigidbody2d.MovePosition(position);}
@@ -141,6 +163,12 @@ public class player : MonoBehaviour
     private void atk_end() {
         q_sw=false;
         Debug.Log("atk_end()");
+    }
+
+    public void DisplayDialog()
+    {
+        timerDisplay = displayTime;
+        dialogBox.SetActive(true);
     }
 
 }//class end

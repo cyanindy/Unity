@@ -97,9 +97,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 103462267c28bce49bafde396e0f4fdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 7
   direction: 1
   first_position: {x: 0, y: 0}
+  start_timer: 2
+  missile_range: {fileID: 0}
 --- !u!61 &330381591031189930
 BoxCollider2D:
   m_ObjectHideFlags: 0

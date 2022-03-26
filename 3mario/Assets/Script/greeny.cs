@@ -141,7 +141,7 @@ public class greeny : MonoBehaviour
     }
 
     private void right_atk_hit() {
-        Collider2D[] collider2Ds = Physics2D.OverlapBoxAll(sight_pos.position, sight_boxSize, 0);
+        Collider2D[] collider2Ds = Physics2D.OverlapBoxAll(right_hit_pos.position, right_hit_boxSize, 0);
         foreach (Collider2D collider in collider2Ds) {
             if (collider.tag == "Player") {
                 collider.GetComponent<player>().ChangeHealth(-1);
