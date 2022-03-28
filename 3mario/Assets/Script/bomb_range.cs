@@ -6,10 +6,11 @@ public class bomb_range : MonoBehaviour
 {
     public GameObject bomb;
     string bombname;
+    bool check;
     // Start is called before the first frame update
     void Start()
     {
-        
+        check=true;
     }
 
     // Update is called once per frame
@@ -23,11 +24,11 @@ public class bomb_range : MonoBehaviour
         player controller = other.GetComponent<player>();
         bombname=this.gameObject.name;
         
-        if (controller != null)
+        if (controller != null && check==true)
         {
             bomb.GetComponent<bomb>().onRange();
             bomb.GetComponent<bomb>().bombsGannaExp(bombname);
-            //Debug.Log("bomb_range script : " + bombname);
+            check=false;
         }
     }
 }

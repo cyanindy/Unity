@@ -37,7 +37,7 @@ public class bomb : MonoBehaviour
 
     public void onRange() {
         onrange=true;
-        Debug.Log("Player is within range");
+        //Debug.Log("Player is within range");
     }
 
     private void OnDrawGizmos() {
@@ -48,13 +48,13 @@ public class bomb : MonoBehaviour
     private void explode(string bombname) {
         bombN=GameObject.Find(bombname);
         Destroy(bombN);
-        Debug.Log("explode() run"+bombname);
+        //Debug.Log("explode() run"+bombname);
     }
 
     public void bombsGannaExp(string rangename) {
         if (rangename=="Bomb_range_1") bomb_name="bomb_1";
         else if (rangename=="Bomb_range_2") bomb_name="bomb_2";
         else if (rangename=="Bomb_range_3") bomb_name="bomb_3";
-        Debug.Log("rangename : "+rangename+" bomb_name : "+bomb_name);
+        //Debug.Log("rangename : "+rangename+" bomb_name : "+bomb_name);
     }
 }

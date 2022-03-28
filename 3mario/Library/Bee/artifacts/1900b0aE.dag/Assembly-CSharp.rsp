@@ -353,6 +353,10 @@
 "Assets/Script/bomb_range.cs"
 "Assets/Script/bounceball.cs"
 "Assets/Script/fireclown.cs"
+"Assets/Script/GameClear.cs"
+"Assets/Script/gameManager.cs"
+"Assets/Script/GameOver.cs"
+"Assets/Script/GameStart.cs"
 "Assets/Script/greeny.cs"
 "Assets/Script/invisible_floor.cs"
 "Assets/Script/McD.cs"
@@ -360,6 +364,8 @@
 "Assets/Script/player.cs"
 "Assets/Script/PointandPotal.cs"
 "Assets/Script/rangeBox.cs"
+"Assets/Script/Timer.cs"
+"Assets/Script/UIhealthBar.cs"
 -langversion:8.0
 
 /deterministic

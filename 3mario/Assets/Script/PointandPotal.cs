@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PointandPotal : MonoBehaviour
 {
     public GameObject departure_obj;
     public GameObject arrival_obj;
+    public GameObject player;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +30,14 @@ public class PointandPotal : MonoBehaviour
     }
 
     private void OnTriggerStay2D(Collider2D collision) {
-        if(collision.CompareTag("Player") && Input.GetKey(KeyCode.G)) {
+        if (collision.CompareTag("Player") && Input.GetKey(KeyCode.G) && this.gameObject.name == "s2_potal") {
+            if(player.GetComponent<player>().curse_count==0) {
+                SceneManager.LoadScene("gameClear");
+            } else {
+                SceneManager.LoadScene("GameOver");
+            }
+        }
+        else if(collision.CompareTag("Player") && Input.GetKey(KeyCode.G)) {
             StartCoroutine( TeleportRoutine() );
             //Debug.Log("keydown");
         }

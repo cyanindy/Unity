@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public class player : MonoBehaviour
@@ -9,11 +10,13 @@ public class player : MonoBehaviour
     public float player_Speed = 60f;
     int player_max_health=5;
     int player_current_health;
-    int curse_count=3;
+    public int curse_count=3;
     bool q_sw=false; public bool g_sw=false; bool w_sw=false;
     Vector3 player_first_position = new Vector3(-11,-1,0);
     Vector2 lookDirection = new Vector2(1,0);
     int int_look_Direction=1;
+    string obj_N;
+    string obj_tag;
     Vector2 w_middle_position; //꼭지점
     Vector2 w_last_position; //w키 입력 이후 이동될 목표지점 좌표
     int w_para=0;
@@ -25,6 +28,8 @@ public class player : MonoBehaviour
     public float displayTime = 2.0f;
     public GameObject dialogBox;
     float timerDisplay;
+
+    public GameObject gameManager;
 
     Animator animator;
 
@@ -71,12 +76,14 @@ public class player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q)) { 
             animator.SetBool("attacking",true);
             RaycastHit2D obj_hit = Physics2D.Raycast(rigidbody2d.position + Vector2.up * 0.2f, lookDirection, 2.0f, LayerMask.GetMask("react_q_obj"));
-            string obj_N=obj_hit.collider.gameObject.name;
+            if (obj_hit.collider != null) {
+                obj_N=obj_hit.collider.gameObject.name;
+                obj_tag = obj_hit.collider.tag;
+            } else {;}
 
-            string obj_tag = obj_hit.collider.tag;
             if (obj_tag == "balls" ) {
                 if (obj_hit.collider != null) {
-                    Debug.Log("keydown Q : " + obj_hit.collider.gameObject);
+                    //Debug.Log("keydown Q : " + obj_hit.collider.gameObject);
                     balls judge_ball = obj_hit.collider.GetComponent<balls>();
                     if (judge_ball != null)
                     {
@@ -93,14 +100,14 @@ public class player : MonoBehaviour
             }
             else if (obj_tag == "greeny") {
                 if (obj_hit.collider != null) {
-                    Debug.Log("keydown Q : " + obj_hit.collider.gameObject);
+                    //Debug.Log("keydown Q : " + obj_hit.collider.gameObject);
                     greeny judge_greeny = obj_hit.collider.GetComponent<greeny>();
                     judge_greeny.hit(obj_N);
                 }
             }
             else if (obj_tag == "McD") {
                 if (obj_hit.collider != null) {
-                    Debug.Log("keydown Q : " + obj_hit.collider.gameObject);
+                    //Debug.Log("keydown Q : " + obj_hit.collider.gameObject);
                     McD judge_mcd = obj_hit.collider.GetComponent<McD>();
                     judge_mcd.hit(1);
                 }
@@ -139,6 +146,17 @@ public class player : MonoBehaviour
                 dialogBox.SetActive(false);
             }
         }
+
+        //r키 입력 리셋
+        if (Input.GetKeyDown(KeyCode.R)) {
+            gameManager.GetComponent<gameManager>().ReStart();
+            //Debug.Log("restart");
+        }
+
+        //게임오버
+        if (player_current_health <= 0) {
+            gameManager.GetComponent<gameManager>().GameOver();
+        }
     
         if(w_para==0) {rigidbody2d.MovePosition(position);}
     }//update end
@@ -146,23 +164,23 @@ public class player : MonoBehaviour
     public void ChangeHealth(int amount)
     {
         player_current_health = Mathf.Clamp(player_current_health + amount, 0, player_max_health);
-        Debug.Log(player_current_health + "/" + player_max_health);
+        UIhealthBar.instance.SetValue(player_current_health / (float)player_max_health);
     }
 
     public void falling() {
         player_current_health=0;
-        Debug.Log(player_current_health + "/" + player_max_health);
+        UIhealthBar.instance.SetValue(player_current_health / (float)player_max_health);
     }
 
     private void atk_start() {
         //player_Speed=0;
         q_sw=true;
-        Debug.Log("atk_start()");
+       // Debug.Log("atk_start()");
     }
 
     private void atk_end() {
         q_sw=false;
-        Debug.Log("atk_end()");
+        //Debug.Log("atk_end()");
     }
 
     public void DisplayDialog()

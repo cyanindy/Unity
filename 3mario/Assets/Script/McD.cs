@@ -44,7 +44,7 @@ public class McD : MonoBehaviour
 
     public void onRange() {
         onrange=true;
-        Debug.Log("Player is within range");
+        //Debug.Log("Player is within range");
     }
 
     private void OnDrawGizmos() {
@@ -54,6 +54,6 @@ public class McD : MonoBehaviour
 
     public void hit(int damege) {
         mcd_health=mcd_health-damege;
-        Debug.Log("McD health :"+mcd_health+"/ 2");
+        //Debug.Log("McD health :"+mcd_health+"/ 2");
     }
 }

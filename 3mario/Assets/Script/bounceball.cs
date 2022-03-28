@@ -36,7 +36,7 @@ public class bounceball : MonoBehaviour
             if (controller != null)
             {
                 controller.ChangeHealth(-1);
-                Debug.Log(first_pos+" "+now_pos);
+                //Debug.Log(first_pos+" "+now_pos);
             }
         }
     }
