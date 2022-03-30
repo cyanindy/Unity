@@ -158,7 +158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a82d1ed21c279d14f966cbf641b6d983, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 3.5
   horizontal: 1
   changeTime: 7
   sight_pos: {fileID: 8413551874746639374}
@@ -167,6 +167,7 @@ MonoBehaviour:
   right_hit_boxSize: {x: 1, y: 1}
   left_hit_pos: {fileID: 1031129982979846707}
   left_hit_boxSize: {x: 1, y: 1}
+  greeny_first_pos: {x: 0, y: 0}
 --- !u!50 &1745724378170914848
 Rigidbody2D:
   serializedVersion: 4

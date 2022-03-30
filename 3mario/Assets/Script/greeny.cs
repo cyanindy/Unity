@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class greeny : MonoBehaviour
 {
-    float speed=7.0f;
+    public float speed=5.0f;
     public bool horizontal=true;
     public float changeTime = 5.0f;
     Rigidbody2D rigidbody2D;
@@ -94,7 +94,7 @@ public class greeny : MonoBehaviour
                 //Debug.Log("player is within greenys sight");
                 dir_for_player=true;
                 if (atk_timer<=0) {
-                    Debug.Log("atk_timer <= 0");
+                    //Debug.Log("atk_timer <= 0");
                     if (player_pos.x > position.x) {
                         animator.SetBool("right_atk",true);
                         isAttacking=true;
@@ -128,7 +128,7 @@ public class greeny : MonoBehaviour
     private void atk_end() {
         isAttacking=false;
         animator.SetBool("isAttacking", false);
-        Debug.Log("atk_end()");
+        //Debug.Log("atk_end()");
     }
 
     private void left_atk_hit() {

@@ -22,6 +22,9 @@ public class player : MonoBehaviour
     int w_para=0;
     float jump_height=2.0f; //점프 높이
     float jump_weith=5.0f; //점프거리
+    float w_cooltime=1.0f; //w쿨타임
+    float w_timer=0.0f; //w쿨타임 타이머
+    bool w_cool_sw=false; //w 쿨 스위치
     public Vector2 player_pos;
 
     //저주해제
@@ -44,7 +47,7 @@ public class player : MonoBehaviour
         rigidbody2d.MovePosition(player_first_position);
     }
 
-    void Update() {
+    async void Update() {
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
         Vector2 position = rigidbody2d.position; //현재위치 백터
@@ -119,17 +122,27 @@ public class player : MonoBehaviour
 
         //w key down
         if (Input.GetKeyDown(KeyCode.W)) {
-            w_last_position.x=position.x+(jump_weith*int_look_Direction); w_last_position.y=position.y;
-            w_middle_position.x=position.x+((jump_weith*int_look_Direction)/2); w_middle_position.y=position.y+jump_height;
-            w_sw=true;
-            w_para=1;
+            if (w_timer <= 0) {
+                w_last_position.x=position.x+(jump_weith*int_look_Direction); w_last_position.y=position.y;
+                w_middle_position.x=position.x+((jump_weith*int_look_Direction)/2); w_middle_position.y=position.y+jump_height;
+                w_sw=true;
+                w_para=1;
+                w_timer=w_cooltime; w_cool_sw=true;
+            }
+        }
+
+        if (w_cool_sw) {
+            w_timer-=Time.deltaTime;
+            if (w_timer<=0) {
+                w_cool_sw=false;
+            }
         }
 
         if(w_para==1) {
-            transform.position=Vector2.MoveTowards(position,w_middle_position,Speed*0.25f*Time.deltaTime);
+            transform.position=Vector2.MoveTowards(position,w_middle_position,Speed*1.25f*Time.deltaTime);
             if (position.y==w_middle_position.y) {w_para=-1;}
         } else if (w_para==-1) {
-            transform.position=Vector2.MoveTowards(position,w_last_position,Speed*0.25f*Time.deltaTime);
+            transform.position=Vector2.MoveTowards(position,w_last_position,Speed*1.25f*Time.deltaTime);
             if (position==w_last_position) {w_para=0; w_sw=false;}
         }
             

@@ -1550,7 +1550,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.5197506, y: 1}
+    m_SensorSize: {x: 2.2183406, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -1567,7 +1567,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 717234321}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.3683825, y: -1.02, z: -10}
+  m_LocalPosition: {x: -7.3733606, y: -1.02, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1015211926}
@@ -3237,7 +3237,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 569161705855145023, guid: 9958c2aac4fa79244ad439db24b20aec, type: 3}
       propertyPath: speed
-      value: 7
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 569161705855145023, guid: 9958c2aac4fa79244ad439db24b20aec, type: 3}
       propertyPath: changeTime
@@ -3950,7 +3950,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1456245257}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.3683825, y: -1.02, z: -10}
+  m_LocalPosition: {x: -7.3733606, y: -1.02, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4325,7 +4325,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 569161705855145023, guid: 9958c2aac4fa79244ad439db24b20aec, type: 3}
       propertyPath: speed
-      value: 7
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 569161705855145023, guid: 9958c2aac4fa79244ad439db24b20aec, type: 3}
       propertyPath: changeTime
@@ -4635,8 +4635,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 160.9974, y: 108.64484}
-  m_SizeDelta: {x: 321.9948, y: 217.2966}
+  m_AnchoredPosition: {x: 132.93, y: 93.192}
+  m_SizeDelta: {x: 265.8636, y: 186.3838}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1927887846
 MonoBehaviour:
@@ -5523,7 +5523,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 569161705855145023, guid: 9958c2aac4fa79244ad439db24b20aec, type: 3}
       propertyPath: speed
-      value: 7
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 569161705855145023, guid: 9958c2aac4fa79244ad439db24b20aec, type: 3}
       propertyPath: hit_pos
@@ -6234,7 +6234,7 @@ PrefabInstance:
       objectReference: {fileID: 234502553}
     - target: {fileID: 8898396262924850575, guid: 0f602e411022a884facecf2fc4090504, type: 3}
       propertyPath: player_Speed
-      value: 50
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f602e411022a884facecf2fc4090504, type: 3}
