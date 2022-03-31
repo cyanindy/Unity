@@ -187,10 +187,10 @@ extern void player_atk_end_m21626EB91C8EDB0DC0A3987D86A4BDC54D10F25A (void);
 extern void player_DisplayDialog_m8F950CB76A146A07297F725BEB46B1A300600613 (void);
 // 0x00000058 System.Void player::.ctor()
 extern void player__ctor_m714EC555B4D536FDD17E68FB029561E4AC0124FB (void);
-// 0x00000059 System.Void player/<Update>d__28::MoveNext()
-extern void U3CUpdateU3Ed__28_MoveNext_mBDAF50C70055033414848E2CC56E0069A7033D25 (void);
-// 0x0000005A System.Void player/<Update>d__28::SetStateMachine(System.Runtime.CompilerServices.IAsyncStateMachine)
-extern void U3CUpdateU3Ed__28_SetStateMachine_m256DD168A118F1784FE9F569E799FAFDAF7AE991 (void);
+// 0x00000059 System.Void player/<Update>d__30::MoveNext()
+extern void U3CUpdateU3Ed__30_MoveNext_mE626FF65494229ABDAA3AD5CC50E065741008465 (void);
+// 0x0000005A System.Void player/<Update>d__30::SetStateMachine(System.Runtime.CompilerServices.IAsyncStateMachine)
+extern void U3CUpdateU3Ed__30_SetStateMachine_m7C6DB177FBABDD4E3E802C8F17CBE5A6F668B71C (void);
 // 0x0000005B System.Void PointandPotal::Start()
 extern void PointandPotal_Start_m27EE4702B1921B2DDE45964575B2BA85C2F261EA (void);
 // 0x0000005C System.Void PointandPotal::Update()
@@ -331,8 +331,8 @@ static Il2CppMethodPointer s_methodPointers[115] =
 	player_atk_end_m21626EB91C8EDB0DC0A3987D86A4BDC54D10F25A,
 	player_DisplayDialog_m8F950CB76A146A07297F725BEB46B1A300600613,
 	player__ctor_m714EC555B4D536FDD17E68FB029561E4AC0124FB,
-	U3CUpdateU3Ed__28_MoveNext_mBDAF50C70055033414848E2CC56E0069A7033D25,
-	U3CUpdateU3Ed__28_SetStateMachine_m256DD168A118F1784FE9F569E799FAFDAF7AE991,
+	U3CUpdateU3Ed__30_MoveNext_mE626FF65494229ABDAA3AD5CC50E065741008465,
+	U3CUpdateU3Ed__30_SetStateMachine_m7C6DB177FBABDD4E3E802C8F17CBE5A6F668B71C,
 	PointandPotal_Start_m27EE4702B1921B2DDE45964575B2BA85C2F261EA,
 	PointandPotal_Update_mEA8AE32FD58FB2A38D2835806C9354D01CC19CF1,
 	PointandPotal_OnTriggerEnter2D_m825B8665ABCA9F074C5F8991E6AE1BECC6D626DC,
@@ -359,12 +359,12 @@ static Il2CppMethodPointer s_methodPointers[115] =
 	UIhealthBar_SetValue_m093AE7C6F9C6E8A5AD81D4D1D4DD92E5612A496A,
 	UIhealthBar__ctor_m66E1B40A868F19F007C23023ADDE2E395103B25A,
 };
-extern void U3CUpdateU3Ed__28_MoveNext_mBDAF50C70055033414848E2CC56E0069A7033D25_AdjustorThunk (void);
-extern void U3CUpdateU3Ed__28_SetStateMachine_m256DD168A118F1784FE9F569E799FAFDAF7AE991_AdjustorThunk (void);
+extern void U3CUpdateU3Ed__30_MoveNext_mE626FF65494229ABDAA3AD5CC50E065741008465_AdjustorThunk (void);
+extern void U3CUpdateU3Ed__30_SetStateMachine_m7C6DB177FBABDD4E3E802C8F17CBE5A6F668B71C_AdjustorThunk (void);
 static Il2CppTokenAdjustorThunkPair s_adjustorThunks[2] = 
 {
-	{ 0x06000059, U3CUpdateU3Ed__28_MoveNext_mBDAF50C70055033414848E2CC56E0069A7033D25_AdjustorThunk },
-	{ 0x0600005A, U3CUpdateU3Ed__28_SetStateMachine_m256DD168A118F1784FE9F569E799FAFDAF7AE991_AdjustorThunk },
+	{ 0x06000059, U3CUpdateU3Ed__30_MoveNext_mE626FF65494229ABDAA3AD5CC50E065741008465_AdjustorThunk },
+	{ 0x0600005A, U3CUpdateU3Ed__30_SetStateMachine_m7C6DB177FBABDD4E3E802C8F17CBE5A6F668B71C_AdjustorThunk },
 };
 static const int32_t s_InvokerIndices[115] = 
 {

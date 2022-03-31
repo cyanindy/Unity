@@ -1695,4 +1695,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/mainScene.unity
   - Assets/Scenes/GameOver.unity
   - Assets/Scenes/gameClear.unity
-  playerPath: D:/Unity/Projects/github_commit/3mario/webGL_Build
+  playerPath: D:/Unity/Projects/github_commit/3mario/0331_build

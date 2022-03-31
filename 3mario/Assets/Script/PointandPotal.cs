@@ -39,6 +39,7 @@ public class PointandPotal : MonoBehaviour
         }
         else if(collision.CompareTag("Player") && Input.GetKey(KeyCode.G)) {
             StartCoroutine( TeleportRoutine() );
+            player.GetComponent<player>().g_sw=true;
             //Debug.Log("keydown");
         }
     }

@@ -22,8 +22,10 @@ public class player : MonoBehaviour
     int w_para=0;
     float jump_height=2.0f; //점프 높이
     float jump_weith=5.0f; //점프거리
-    float w_cooltime=1.0f; //w쿨타임
+    float w_cooltime=0.8f; //w쿨타임
     float w_timer=0.0f; //w쿨타임 타이머
+    float g_cooltime=3.0f; //g쿨타임
+    float g_timer=0.0f; //g쿨타임 타이머
     bool w_cool_sw=false; //w 쿨 스위치
     public Vector2 player_pos;
 
@@ -64,12 +66,12 @@ public class player : MonoBehaviour
         if (horizontal==0) {
             animator.SetBool("isMoving", false);
         }
-        else if(horizontal < 0) {
+        else if(horizontal < 0 && !w_sw) {
             animator.SetInteger ("direction", -1);
             animator.SetBool("isMoving", true);
             int_look_Direction=-1;
         }
-        else if (horizontal > 0 ) {
+        else if (horizontal > 0 && !w_sw) {
             animator.SetInteger ("direction", 1);
             animator.SetBool("isMoving", true);
             int_look_Direction=1;
@@ -170,14 +172,24 @@ public class player : MonoBehaviour
         if (player_current_health <= 0) {
             gameManager.GetComponent<gameManager>().GameOver();
         }
+
+        if (g_sw) {
+            g_timer-=Time.deltaTime;
+            if (g_timer<=0) {
+                g_timer=g_cooltime;
+                g_sw=false;
+            }
+        }
     
         if(w_para==0) {rigidbody2d.MovePosition(position);}
     }//update end
 
     public void ChangeHealth(int amount)
     {
-        player_current_health = Mathf.Clamp(player_current_health + amount, 0, player_max_health);
-        UIhealthBar.instance.SetValue(player_current_health / (float)player_max_health);
+        if (!g_sw) {
+            player_current_health = Mathf.Clamp(player_current_health + amount, 0, player_max_health);
+            UIhealthBar.instance.SetValue(player_current_health / (float)player_max_health);
+        }
     }
 
     public void falling() {
